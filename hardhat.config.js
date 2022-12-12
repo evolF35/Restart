@@ -3,6 +3,8 @@ require('dotenv').config()
 require("@nomiclabs/hardhat-ethers");
 
 require("@nomiclabs/hardhat-etherscan");
+require('hardhat-contract-sizer');
+
 
 
 
@@ -31,5 +33,6 @@ module.exports = {
       url: GoerliUrl,
       accounts: { mnemonic: process.env.MNEMONIC }
    }
-  }
+  },
+
 };
