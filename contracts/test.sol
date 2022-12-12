@@ -25,7 +25,7 @@ contract Pool {
     POS public positiveSide;
     NEG public negativeSide;
 
-    useChainLink public oracle;
+    AggregatorV3Interface public oracle;
 
     constructor(address _oracle, int256 _price, uint256 _settlementDate) {
         settlementDate = _settlementDate;
@@ -36,7 +36,7 @@ contract Pool {
         negativeSide = new NEG("UNDER");
         condition = false;
 
-        oracle = new useChainLink(oracleAddress);
+        oracle = AggregatorV3Interface(oracleAddress);
     }
 
     function depositToPOS() public payable {
@@ -56,7 +56,7 @@ contract Pool {
 
     function settle() public {
         require(block.timestamp > settlementDate, "te");
-        int256 resultPrice = oracle.getLatestPrice();
+        (,int256 resultPrice,,,) = oracle.latestRoundData();
 
         if(resultPrice >= price){
             condition = true;
@@ -87,24 +87,23 @@ contract Pool {
 
         (payable(msg.sender)).transfer(saved);
     }
-
 }
 
 
-contract useChainLink {
+// contract useChainLink {
     
-    AggregatorV3Interface public priceFeed;
-    address public owner;
+//     AggregatorV3Interface public priceFeed;
+//     address public owner;
 
-    constructor(address _oracle) {
-        priceFeed = AggregatorV3Interface(_oracle);
-    }
+//     constructor(address _oracle) {
+//         priceFeed = AggregatorV3Interface(_oracle);
+//     }
 
-    function getLatestPrice() public view returns (int){
-        (,int price,,,) = priceFeed.latestRoundData();
-        return(price);
-    }
-}
+//     function getLatestPrice() public view returns (int){
+//         (,int price,,,) = priceFeed.latestRoundData();
+//         return(price);
+//     }
+// }
 
 contract POS is ERC20, Ownable {
     constructor(string memory name) ERC20(name,"POS") {
@@ -134,8 +133,11 @@ contract NEG is ERC20, Ownable {
 
 contract deploy {
 
-    function createPool(address oracle, int256 price, uint256 settlementDate) public {
-        //Pool p = new Pool(oracle, price, settlementDate);        
-        address(new Pool(oracle,price,settlementDate));
+    event PoolCreated(address _oracle, int256 _price, uint256 _settlementDate,address poolAddress);
+
+    function createPool(address oracle, int256 price, uint256 settlementDate) public returns (address newPool){
+        newPool = address(new Pool(oracle,price,settlementDate));
+        emit PoolCreated(oracle,price,settlementDate,newPool);
+        return(newPool);
     }
 }
