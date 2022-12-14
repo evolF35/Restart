@@ -22,7 +22,11 @@ const optimismGoerliUrl =
 module.exports = {
   solidity: "0.8.9",
   etherscan:{
-    apiKey: `${process.env.ETHERSCAN_API_KEY}`
+    apiKey: {
+      mainnet: `${process.env.ETHERSCAN_API_KEY}`,
+      goerli: `${process.env.ETHERSCAN_API_KEY}`,
+      optimisticGoerli: `${process.env.ETHERSCAN_API_KEY}`,
+  }
   },
   networks: {
     "optimism-goerli": {

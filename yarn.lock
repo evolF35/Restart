@@ -859,18 +859,18 @@
   "resolved" "https://registry.npmjs.org/@tsconfig/node16/-/node16-1.0.3.tgz"
   "version" "1.0.3"
 
-"@typechain/ethers-v5@^10.1.0", "@typechain/ethers-v5@^10.1.1":
-  "integrity" "sha512-o6nffJBxwmeX1ZiZpdnP/tqGd/7M7iYvQC88ZXaFFoyAGh7eYncynzVjOJV0XmaKzAc6puqyqZrnva+gJbk4sw=="
-  "resolved" "https://registry.npmjs.org/@typechain/ethers-v5/-/ethers-v5-10.1.1.tgz"
-  "version" "10.1.1"
+"@typechain/ethers-v5@^10.1.0", "@typechain/ethers-v5@^10.2.0":
+  "integrity" "sha512-ikaq0N/w9fABM+G01OFmU3U3dNnyRwEahkdvi9mqy1a3XwKiPZaF/lu54OcNaEWnpvEYyhhS0N7buCtLQqC92w=="
+  "resolved" "https://registry.npmjs.org/@typechain/ethers-v5/-/ethers-v5-10.2.0.tgz"
+  "version" "10.2.0"
   dependencies:
     "lodash" "^4.17.15"
     "ts-essentials" "^7.0.1"
 
-"@typechain/hardhat@^6.1.2", "@typechain/hardhat@^6.1.4":
-  "integrity" "sha512-S8k5d1Rjc+plwKpkorlifmh72M7Ki0XNUOVVLtdbcA/vLaEkuqZSJFdddpBgS5QxiJP+6CbRa/yO6EVTE2+fMQ=="
-  "resolved" "https://registry.npmjs.org/@typechain/hardhat/-/hardhat-6.1.4.tgz"
-  "version" "6.1.4"
+"@typechain/hardhat@^6.1.2", "@typechain/hardhat@^6.1.5":
+  "integrity" "sha512-lg7LW4qDZpxFMknp3Xool61Fg6Lays8F8TXdFGBG+MxyYcYU5795P1U2XdStuzGq9S2Dzdgh+1jGww9wvZ6r4Q=="
+  "resolved" "https://registry.npmjs.org/@typechain/hardhat/-/hardhat-6.1.5.tgz"
+  "version" "6.1.5"
   dependencies:
     "fs-extra" "^9.1.0"
 
