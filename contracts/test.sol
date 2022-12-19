@@ -5,6 +5,7 @@ pragma solidity ^0.8.9;
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@chainlink/contracts/src/v0.8/interfaces/AggregatorV3Interface.sol";
+import "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
 
 contract Pool {
 
@@ -34,6 +35,7 @@ contract Pool {
 
         positiveSide = new POS("OVER");
         negativeSide = new NEG("UNDER");
+
         condition = false;
 
         oracle = AggregatorV3Interface(oracleAddress);
@@ -51,7 +53,6 @@ contract Pool {
         require(msg.value > 0.001 ether, "mc");
         negativeSide.mint(msg.value);
         negativeSide.transfer(msg.sender,msg.value);
-
     }
 
     function settle() public {
@@ -88,22 +89,6 @@ contract Pool {
         (payable(msg.sender)).transfer(saved);
     }
 }
-
-
-// contract useChainLink {
-    
-//     AggregatorV3Interface public priceFeed;
-//     address public owner;
-
-//     constructor(address _oracle) {
-//         priceFeed = AggregatorV3Interface(_oracle);
-//     }
-
-//     function getLatestPrice() public view returns (int){
-//         (,int price,,,) = priceFeed.latestRoundData();
-//         return(price);
-//     }
-// }
 
 contract POS is ERC20, Ownable {
     constructor(string memory name) ERC20(name,"POS") {
